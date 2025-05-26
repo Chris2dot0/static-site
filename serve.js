@@ -17,6 +17,12 @@ app.get('/pages/:page', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'pages', `${page}.html`));
 });
 
+// Serve blog posts from the /blog directory
+app.get('/blog/:post', (req, res) => {
+    const post = req.params.post;
+    res.sendFile(path.join(__dirname, 'dist', 'blog', `${post}.html`));
+});
+
 // Serve other static files (like styles and scripts copied to dist)
 app.use(express.static('dist'));
 

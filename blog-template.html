@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - Blog - My Website</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <style>
+        /* Add specific blog post styling here */
+        .blog-post-content {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .blog-post-content h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 1rem;
+        }
+        .blog-post-content p {
+            margin-bottom: 1rem;
+        }
+        .blog-post-content pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            overflow-x: auto;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        .blog-post-content code {
+            font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Your Logo</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/pages/about.html">About</a></li>
+                <li><a href="/pages/faq.html">FAQ</a></li>
+                <li><a href="/pages/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="blog-post-content">
+        {{content}}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Website. All rights reserved.</p>
+    </footer>
+
+    <script src="/scripts/main.js"></script>
+</body>
+</html> 

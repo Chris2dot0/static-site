@@ -3,47 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Website</title>
+    <title>Part-Time YouTuber Academy</title>
     <link rel="stylesheet" href="/styles/main.css">
+    <style>
+        /* Basic styling for the new sections based on the image */
+        .new-hero {
+            text-align: center;
+            padding: 8rem 1rem 4rem;
+            background-color: #f8f8f8; /* Light background color */
+        }
+        .new-hero h1 {
+            font-size: 3.5rem;
+            color: #000; /* Dark color for main heading */
+            margin-bottom: 1rem;
+        }
+        .new-hero .gradient-text {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #3498db, #8e44ad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #3498db; /* Fallback color */
+        }
+        .new-hero p {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        .new-hero .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #2c3e50; /* Dark button color */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 2rem;
+            transition: background-color 0.3s ease;
+        }
+        .new-hero .cta-button:hover {
+            background-color: #34495e;
+        }
+
+        .social-proof {
+            text-align: center;
+            padding: 4rem 1rem;
+            background-color: #ffffff; /* White background */
+        }
+        .social-proof h2 {
+             font-size: 2rem;
+             color: #000;
+             margin-bottom: 2rem;
+             position: relative;
+             display: inline-block;
+        }
+         .social-proof h2::after {
+             content: '';
+             position: absolute;
+             left: 0;
+             bottom: -5px;
+             width: 100%;
+             height: 3px;
+             background-color: #3498db; /* Underline color */
+        }
+        .creator-images {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .creator-images img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #3498db;
+        }
+
+         /* Adjust padding for fixed header */
+         body {
+             padding-top: 60px; /* Height of the fixed header */
+         }
+          header {
+             background-color: #ffffff;
+             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+             position: fixed;
+             width: 100%;
+             top: 0;
+             left: 0;
+             z-index: 1000;
+         }
+
+         nav {
+             max-width: 1200px;
+             margin: 0 auto;
+             padding: 0.8rem 1rem;
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+         }
+
+         .logo {
+             font-size: 1.2rem;
+             font-weight: bold;
+             color: #2c3e50;
+             display: flex;
+             align-items: center;
+         }
+         .logo img {
+             height: 30px;
+             margin-right: 0.5rem;
+         }
+
+         .nav-links {
+             display: flex;
+             list-style: none;
+             gap: 1.5rem;
+         }
+
+         .nav-links a {
+             text-decoration: none;
+             color: #2c3e50;
+             font-weight: 500;
+             transition: color 0.3s ease;
+         }
+
+         .nav-links a:hover {
+             color: #3498db;
+         }
+
+    </style>
 </head>
 <body>
     <header>
         <nav>
-            <div class="logo">Your Logo</div>
+            <div class="logo">
+                <img src="placeholder-logo.png" alt="Logo">
+                PART-TIME
+                YOUTUBER
+                ACADEMY
+            </div>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
-                <li><a href="/pages/blog.html">Blog</a></li>
-                <li><a href="/pages/about.html">About</a></li>
-                <li><a href="/pages/faq.html">FAQ</a></li>
-                <li><a href="/pages/contact.html">Contact</a></li>
+                <li><a href="#">Academy</a></li>
+                <li><a href="#">Course Login</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="hero">
-            <h1>Welcome to My Website</h1>
-            <p>Your compelling tagline goes here</p>
-            <a href="#learn-more" class="cta-button">Learn More</a>
+        <section class="new-hero">
+            <h1>Welcome to the</h1>
+            <div class="gradient-text">Part-Time YouTuber Academy</div>
+            <p>We've condensed 7+ years of YouTube experience into programmes designed to help you on your YouTube journey.</p>
+            <p>We learned lessons the hard way, so you don't have to...</p>
+            <a href="#" class="cta-button">Find Out More 🔥</a>
         </section>
 
-        <section id="learn-more" class="features">
-            <h2>What We Offer</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>Feature 1</h3>
-                    <p>Description of your first main feature</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Feature 2</h3>
-                    <p>Description of your second main feature</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Feature 3</h3>
-                    <p>Description of your third main feature</p>
-                </div>
+        <section class="social-proof">
+            <h2>We've helped over 6,000 creators start and grow a successful YouTube channel</h2>
+            <div class="creator-images">
+                <!-- Placeholder images - replace with actual image paths -->
+                <img src="placeholder-creator.jpg" alt="Creator">
+                <img src="placeholder-creator.jpg" alt="Creator">
+                <img src="placeholder-creator.jpg" alt="Creator">
+                <img src="placeholder-creator.jpg" alt="Creator">
+                <img src="placeholder-creator.jpg" alt="Creator">
+                <img src="placeholder-creator.jpg" alt="Creator">
+                <img src="placeholder-creator.jpg" alt="Creator">
+                <img src="placeholder-creator.jpg" alt="Creator">
+                <img src="placeholder-creator.jpg" alt="Creator">
+                <img src="placeholder-creator.jpg" alt="Creator">
             </div>
         </section>
+
+        <!-- Add more sections here as needed -->
+
     </main>
 
     <footer>
