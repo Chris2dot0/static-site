@@ -6,11 +6,13 @@ const { marked } = require('marked');
 const config = {
     contentDir: 'content',
     outputDir: 'dist',
+    pagesDir: 'pages',
     template: 'template.html'
 };
 
-// Ensure output directory exists
+// Ensure output directories exist
 fs.ensureDirSync(config.outputDir);
+fs.ensureDirSync(path.join(config.outputDir, config.pagesDir));
 
 // Read the template
 const template = fs.readFileSync(config.template, 'utf-8');
@@ -27,26 +29,29 @@ function wrapInTemplate(content, title) {
         .replace('{{content}}', content);
 }
 
-// Process all markdown files
+// Process all markdown files and copy static index.html
 async function build() {
     try {
         // Copy static assets
         await fs.copy('styles', path.join(config.outputDir, 'styles'));
         await fs.copy('scripts', path.join(config.outputDir, 'scripts'));
+        
+        // Copy the static index.html
+        await fs.copy('index.html', path.join(config.outputDir, 'index.html'));
 
-        // Process markdown files
+        // Process markdown files (excluding index.md)
         const contentDir = config.contentDir;
         const files = await fs.readdir(contentDir);
 
         for (const file of files) {
-            if (path.extname(file) === '.md') {
+            if (path.extname(file) === '.md' && file !== 'index.md') {
                 const markdown = await fs.readFile(path.join(contentDir, file), 'utf-8');
                 const html = convertMarkdownToHtml(markdown);
                 const title = path.basename(file, '.md');
                 const finalHtml = wrapInTemplate(html, title);
 
-                // Create output file
-                const outputPath = path.join(config.outputDir, `${title}.html`);
+                const outputPath = path.join(config.outputDir, config.pagesDir, `${title}.html`);
+                
                 await fs.writeFile(outputPath, finalHtml);
                 console.log(`Built: ${outputPath}`);
             }

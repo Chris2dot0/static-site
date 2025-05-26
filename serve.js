@@ -11,11 +11,14 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
-// Serve other HTML files
-app.get('/:page', (req, res) => {
+// Serve pages from the /pages directory
+app.get('/pages/:page', (req, res) => {
     const page = req.params.page;
-    res.sendFile(path.join(__dirname, 'dist', `${page}.html`));
+    res.sendFile(path.join(__dirname, 'dist', 'pages', `${page}.html`));
 });
+
+// Serve other static files (like styles and scripts copied to dist)
+app.use(express.static('dist'));
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
