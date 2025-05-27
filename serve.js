@@ -14,7 +14,9 @@ app.get('/', (req, res) => {
 // Serve pages from the /pages directory
 app.get('/pages/:page', (req, res) => {
     const page = req.params.page;
-    res.sendFile(path.join(__dirname, 'dist', 'pages', `${page}.html`));
+    // Add .html only if the extension is not already present
+    const filename = page.endsWith('.html') ? page : `${page}.html`;
+    res.sendFile(path.join(__dirname, 'dist', 'pages', filename));
 });
 
 // Serve blog posts from the /blog directory

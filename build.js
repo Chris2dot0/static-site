@@ -21,6 +21,8 @@ fs.ensureDirSync(path.join(config.outputDir, config.blogOutputDir));
 // Read the templates
 const template = fs.readFileSync(config.template, 'utf-8');
 const blogTemplate = fs.readFileSync(config.blogTemplate, 'utf-8');
+const headerHtml = fs.readFileSync('header.html', 'utf-8');
+const footerHtml = fs.readFileSync('footer.html', 'utf-8');
 
 // Function to convert markdown to HTML
 function convertMarkdownToHtml(markdown) {
@@ -31,7 +33,9 @@ function convertMarkdownToHtml(markdown) {
 function wrapInTemplate(content, title, templateContent) {
     return templateContent
         .replace('{{title}}', title)
-        .replace('{{content}}', content);
+        .replace('{{content}}', content)
+        .replace('{{header}}', headerHtml)
+        .replace('{{footer}}', footerHtml);
 }
 
 // Process markdown files and copy static index.html
@@ -41,9 +45,6 @@ async function build() {
         await fs.copy('styles', path.join(config.outputDir, 'styles'));
         await fs.copy('scripts', path.join(config.outputDir, 'scripts'));
 
-        // Copy the static index.html
-        await fs.copy('index.html', path.join(config.outputDir, 'index.html'));
-
         // Process markdown files in content/ (excluding index.md and blog dir)
         const contentDir = config.contentDir;
         let files = await fs.readdir(contentDir);
@@ -51,13 +52,15 @@ async function build() {
         for (const file of files) {
             const filePath = path.join(contentDir, file);
             const stat = await fs.stat(filePath);
-            if (stat.isFile() && path.extname(file) === '.md' && file !== 'index.md') {
+            if (stat.isFile() && path.extname(file) === '.md') {
                 const markdown = await fs.readFile(filePath, 'utf-8');
                 const html = convertMarkdownToHtml(markdown);
                 const title = path.basename(file, '.md');
                 const finalHtml = wrapInTemplate(html, title, template);
 
-                const outputPath = path.join(config.outputDir, config.pagesDir, `${title}.html`);
+                const outputPath = file === 'index.md' 
+                    ? path.join(config.outputDir, 'index.html') 
+                    : path.join(config.outputDir, config.pagesDir, `${title}.html`);
 
                 await fs.writeFile(outputPath, finalHtml);
                 console.log(`Built: ${outputPath}`);
@@ -83,6 +86,24 @@ async function build() {
                  console.log(`Built: ${outputPath}`);
              }
          }
+
+        // Generate blog index page
+        const blogIndexContentDir = path.join(config.contentDir, config.blogDir);
+        const blogIndexFiles = await fs.readdir(blogIndexContentDir);
+        let blogListHtml = '<h1>Blog Posts</h1><ul>';
+        for (const file of blogIndexFiles) {
+            if (path.extname(file) === '.md') {
+                const title = path.basename(file, '.md');
+                const link = `/blog/${title}.html`;
+                blogListHtml += `<li><a href="${link}">${title}</a></li>`;
+            }
+        }
+        blogListHtml += '</ul>';
+
+        const blogIndexFinalHtml = wrapInTemplate(blogListHtml, 'Blog', template);
+        const blogIndexOutputPath = path.join(config.outputDir, config.blogOutputDir, 'index.html');
+        await fs.writeFile(blogIndexOutputPath, blogIndexFinalHtml);
+        console.log(`Built: ${blogIndexOutputPath}`);
 
         console.log('Build completed successfully!');
     } catch (error) {
